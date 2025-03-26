@@ -4,7 +4,8 @@ import { defineConfig, devices } from '@playwright/test';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
+import path from 'path';
 dotenv.config();
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
@@ -35,6 +36,15 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    {
+      name: 'saucedemo',
+      testDir: path.resolve(__dirname, './apps/saucedemo/tests'),
+      use: {
+        baseURL: 'https://www.saucedemo.com/',
+        trace: 'on-first-retry',
+        ...devices['Desktop Chrome'],
+      },
+    },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
