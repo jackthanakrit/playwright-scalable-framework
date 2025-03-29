@@ -5,7 +5,8 @@
       "module": "CommonJS",
       "moduleResolution": "node",
       "lib": ["DOM", "ES2020"],
-      "types": ["@playwright/test"]
+      "types": ["@playwright/test"],
+      "forceConsistentCasingInFileNames": true
     },
     "include": ["**/*.ts"]
   }
