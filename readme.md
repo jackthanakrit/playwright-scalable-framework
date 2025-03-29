@@ -1,3 +1,6 @@
+![Playwright CI](https://github.com/jackthanakrit/playwright-scalable-framework/actions/workflows/test_pipeline.yml/badge.svg)  
+🔍 [View latest Allure Report](https://jackthanakrit.github.io/playwright-scalable-framework/)
+
 # Playwright Best Practices
 
 # 🎯 Project Structure — Folder Responsibilities
