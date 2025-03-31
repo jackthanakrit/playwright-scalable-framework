@@ -46,7 +46,7 @@ export default defineConfig({
       },
     },
     {
-      name: 'saucedemo',
+      name: 'fakestore',
       testDir: path.resolve(__dirname, './apps/fakestore/tests'),
       use: {
         trace: 'on-first-retry',

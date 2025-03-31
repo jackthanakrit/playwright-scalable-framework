@@ -40,7 +40,6 @@ test("should fetch a product by ID successfully", async () => {
         },
     };
     const product = await getProductById(productId,retryConfig);
-    console.log(product)
 
     // Validate the response is an object
     expect(typeof product).toBe("object");
@@ -88,7 +87,6 @@ test("should fetch products by category successfully", async () => {
         },
     };
     const products = await getProductsByCategory(category, retryConfig);
-    console.log(products)
     // Validate the response is an array
     expect(Array.isArray(products)).toBeTruthy();
 
