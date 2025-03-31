@@ -2,30 +2,35 @@ import { test, expect } from '@playwright/test';
 import { getProductById, getProducts, getProductCategories, getProductsByCategory } from '../api/products.api';
 
 test("should fetch all products successfully", async () => {
-    const retryConfig = {
-        retry: true,
-        retryCount: 3,
-        retryDelay: 1000,
-        retryCondition: (error: any) => {
-            // Retry on network errors or 5xx server errors
-            return error.response && error.response.status >= 500;
-        },
+  const retryConfig = {
+    retry: true,
+    retryCount: 3,
+    retryDelay: 1000,
+    retryCondition: (error: any) => {
+      // Retry on network errors or 5xx server errors
+      return error.response && error.response.status >= 500;
+    },
     };
-    const products = await getProducts(retryConfig);
-
+  await test.step("Fetching all products from the API", async () => {
+  // This step will be retried if it fails
+  const products = await getProducts(retryConfig);
+        
+    await test.step("Validating the response", async () => {
     // Validate the response is an array
     expect(Array.isArray(products)).toBeTruthy();
 
     // Validate the structure of the first product (if products exist)
     if (products.length > 0) {
-        const product = products[0];
-        expect(product).toHaveProperty("id");
-        expect(product).toHaveProperty("title");
-        expect(product).toHaveProperty("price");
-        expect(product).toHaveProperty("description");
-        expect(product).toHaveProperty("category");
-        expect(product).toHaveProperty("image");
+      const product = products[0];
+      expect(product).toHaveProperty("id");
+      expect(product).toHaveProperty("title");
+      expect(product).toHaveProperty("price");
+      expect(product).toHaveProperty("description");
+      expect(product).toHaveProperty("category");
+      expect(product).toHaveProperty("image");
     }
+    });
+  });
 });
 
 test("should fetch a product by ID successfully", async () => {
