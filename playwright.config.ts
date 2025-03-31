@@ -46,6 +46,14 @@ export default defineConfig({
       },
     },
     {
+      name: 'saucedemo',
+      testDir: path.resolve(__dirname, './apps/fakestore/tests'),
+      use: {
+        trace: 'on-first-retry',
+        ...devices['Desktop Chrome'],
+      },
+    },
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
