@@ -10,11 +10,28 @@ dotenv.config();
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+const browserName = (process.env.BROWSER || 'chromium').toLowerCase();
+const browserUse = (() => {
+  switch (browserName) {
+    case 'firefox':
+      return { ...devices['Desktop Firefox'] };
+    case 'webkit':
+    case 'safari':
+      return { ...devices['Desktop Safari'] };
+    case 'edge':
+    case 'msedge':
+      return { ...devices['Desktop Edge'], channel: 'msedge' };
+    case 'chromium':
+    case 'chrome':
+    default:
+      return { ...devices['Desktop Chrome'] };
+  }
+})();
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -42,7 +59,7 @@ export default defineConfig({
       use: {
         baseURL: 'https://www.saucedemo.com/',
         trace: 'on-first-retry',
-        ...devices['Desktop Chrome'],
+        ...browserUse,
       },
     },
     {

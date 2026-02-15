@@ -4,6 +4,7 @@
 ## 📚 Table of Contents
 - [📚 Table of Contents](#-table-of-contents)
 - [📖 Project Overview](#-project-overview)
+- [🤖 AI-Assisted Workflow](#-ai-assisted-workflow)
 - [⚙️ Setup](#️-setup)
 - [📂 Folder Structure](#-folder-structure)
 - [📁 Folder Responsibilities](#-folder-responsibilities)
@@ -13,7 +14,6 @@
 - [🚀 Usage](#-usage)
   - [Running Tests](#running-tests)
   - [Debugging](#debugging)
-- [🤝 Contributing](#-contributing)
 - [📜 Additional Resources](#-additional-resources)
 
 ---
@@ -21,6 +21,30 @@
 ## 📖 Project Overview
 
 This project follows a scalable, modular test automation structure using Playwright. It is designed to support testing multiple websites/apps with shared logic and feature-based execution.
+
+---
+
+## 🤖 AI-Assisted Workflow
+
+This repo is set up to work well with GitHub Copilot in VS Code. Use the guidance below to keep generated code aligned with existing patterns.
+
+**Where Copilot should look first**
+- Page objects and UI flows in `apps/*/pages/`
+- API helpers in `apps/*/api/` and `shared/api/`
+- Existing tests in `apps/*/tests/`
+
+**Suggested prompts**
+- "Add a Playwright test for the login happy path using the existing page object."
+- "Create a new page object for the checkout page following current conventions."
+- "Add an API helper that wraps the products endpoint like other helpers."
+
+**Guardrails**
+- Reuse existing helpers and utilities before creating new ones.
+- Keep test data deterministic; avoid random values unless required.
+- Keep selectors stable and use page object methods rather than inline selectors in tests.
+- Prefer the app-specific folders under `apps/` for new tests and page objects.
+
+For deeper guidance, see `.github/copilot-instructions.md`.
 
 ---
 
@@ -85,7 +109,7 @@ Contains individual application domains (e.g., `website-a`, `website-b`). Each a
 
 - **pages/**: Page Object Model (POM) classes for UI interaction.
 - **components/**: Reusable UI components shared across pages.
-- **tests/**: Playwright test specs organized by feature.
+- **tests/**: All Playwright tests live here, organized by feature.
 - **fixtures/**: Reusable test setup logic using `test.extend()`.
 - **utils/**: Utility functions specific to each app.
 
@@ -124,37 +148,6 @@ Contains general-purpose test framework configuration.
   npx playwright test --headed
   ```
 - Use `page.pause()` to inspect the browser during test execution.
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Follow these steps to contribute:
-
-1. **Fork the Repository**:
-   - Click the "Fork" button on the GitHub repository.
-
-2. **Create a Feature Branch**:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-3. **Make Changes**:
-   - Follow the project structure and coding standards.
-   - Run `npm run lint` to ensure code quality.
-
-4. **Commit Changes**:
-   ```bash
-   git commit -m "Add your meaningful commit message here"
-   ```
-
-5. **Push Changes**:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-6. **Create a Pull Request**:
-   - Open a pull request on the GitHub repository.
 
 ---
 
